@@ -20,7 +20,7 @@ def init_db():
             sex TEXT NOT NULL,
             size TEXT NOT NULL,
             status TEXT NOT NULL,
-            description TEXT NOT NULL
+            description TEXT NOT NULL,
             image TEXT
         )
     ''')
