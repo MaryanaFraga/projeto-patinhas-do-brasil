@@ -1,0 +1,15 @@
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local database
+database.db
+
+# Virutal environment
+venv/
+.venv/
+
+# Code editor files
+.vscode/
