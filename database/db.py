@@ -20,7 +20,7 @@ def init_db():
             sex TEXT NOT NULL,
             size TEXT NOT NULL,
             status TEXT NOT NULL,
-            description TEXT NOT NULL,
+            description TEXT,
             image TEXT
         )
     ''')
@@ -32,7 +32,7 @@ def init_db():
             cellphone TEXT NOT NULL,
             email TEXT NOT NULL,
             address TEXT NOT NULL,
-            observations TEXT NOT NULL
+            observations TEXT
         )
     ''')
 
