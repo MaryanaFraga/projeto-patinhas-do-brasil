@@ -14,5 +14,9 @@ init_db()
 # Register the animal routes
 app.register_blueprint(animal_routes)
 
+@app.route('/')
+def home():
+    return "Database connected successfully."
+
 if __name__ == '__main__':
     app.run(debug=True)
