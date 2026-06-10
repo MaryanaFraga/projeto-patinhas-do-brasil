@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Cadastrar Novo Animal</h1>
-    <form action="/animals/add_animals" method="POST">
+    <form action="/animals/add_animal" method="POST">
         <label for="name">Nome:</label><br>
         <input type="text" id="name" name="name" required><br><br>
 
@@ -26,6 +26,26 @@
             <option value="F">Feminino</option>
             <option value="I">Indefinido</option>
         </select><br><br>
+
+        <label for="size">Tamanho:</label><br>
+        <select id="size" name="size" required>
+            <option value="P">Pequeno</option>
+            <option value="M">Médio</option>
+            <option value="G">Grande</option>
+        </select><br><br>
+
+        <label for="status">Status:</label><br>
+        <select id="status" name="status" required>
+            <option value="disponivel">Disponível</option>
+            <option value="adotado">Adotado</option>
+            <option value="pendente">Pendente</option>
+        </select><br><br>
+
+        <label for="description">Descrição:</label><br>
+        <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
+
+        <label for="image">URL da Imagem:</label><br>
+        <input type="text" id="image" name="image"><br><br>
 
         <input type="submit" value="Cadastrar">
     </form>
