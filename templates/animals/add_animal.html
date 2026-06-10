@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Patinhas | Cadastro</title>
+</head>
+<body>
+    <h1>Cadastrar Novo Animal</h1>
+    <form action="/animals/add_animals" method="POST">
+        <label for="name">Nome:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="species">Espécie:</label><br>
+        <input type="text" id="species" name="species" required><br><br>
+
+        <label for="breed">Raça:</label><br>
+        <input type="text" id="breed" name="breed"><br><br>
+
+        <label for="age">Idade:</label><br>
+        <input type="number" id="age" name="age"><br><br>
+
+        <label for="sex">Sexo:</label><br>
+        <select id="sex" name="sex" required>
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+            <option value="I">Indefinido</option>
+        </select><br><br>
+
+        <input type="submit" value="Cadastrar">
+    </form>
+
+    <hr>
+
+    <h2>Animais Cadastrados</h2>
+    <ul>
+        {% for animal in animals %}
+            <li><strong>{{ animal.name }}</strong> - {{ animal.species }} - {{ animal.breed }} - {{ animal.age }} anos - {{ animal.sex }}</li>
+        {% else %}
+            <li>Nenhum animal cadastrado.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
