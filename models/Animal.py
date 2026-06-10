@@ -4,7 +4,7 @@ class Animal:
     STATUS_ADOPTED = 'adotado'
     STATUS_PROCESSING = 'em processo'
     
-    def __init__(self, name, species, breed, age, sex, size, status=STATUS_AVAILABLE, description='', image=None, id=None):
+    def __init__(self, name, species, breed, age, sex, size, status, image, description='', id=None):
         self.id = id
         self.name = name
         self.species = species
