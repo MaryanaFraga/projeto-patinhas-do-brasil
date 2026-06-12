@@ -17,13 +17,5 @@ app.register_blueprint(animal_routes)
 def home():
     return render_template('index.html')
 
-@app.route('/animals/add_animal')
-def register_animal():
-    return render_template('animals/add_animal.html')
-
-@app.route('/animals/list_animals')
-def view_animals():
-    return render_template('animals/list_animals.html')
-
 if __name__ == '__main__':
     app.run(debug=True)
