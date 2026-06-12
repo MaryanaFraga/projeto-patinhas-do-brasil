@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="listar_simples_style.css">
+    <title>Projeto Patinhas | Listagem</title>
+</head>
+<body>
+    <h1>Animais Cadastrados</h1>
+    <ul>
+        {% for animal in animals %}
+            <li>
+                <strong>
+                    {{ animal.name }}
+                </strong>
+                - {{ animal.species }}
+                - {{ animal.breed }}
+                - {{ animal.age }} anos
+                - {{ animal.sex }}
+                - {{ animal.size }}
+                - {{ animal.status }}
+                - {{ animal.description }}
+                - {{ animal.image }} 
+                <a href=""><button>Editar</button></a>
+                <form action="/animais/remover_registro/{{animal.id}}" method="POST" style="display: inline;">
+                <button type="submit" onclick="return confirm('Tem certeza que deseja deletar o animal {{ animal.name }}?')">Deletar</button>
+            </form>
+            </li>
+        {% else %}
+            <li>Nenhum animal cadastrado.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
