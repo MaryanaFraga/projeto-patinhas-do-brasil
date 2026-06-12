@@ -4,8 +4,12 @@ from services.animal_service import AnimalService
 
 animal_routes = Blueprint('animal_routes', __name__)
 
-@animal_routes.route('/animals/add_animal', methods=['GET','POST'])
-def add_animal():
+@animal_routes.route('/animais/menu')
+def show_menu():
+    return render_template('animais/menu.html')
+
+@animal_routes.route('/animais/cadastrar', methods=['POST', 'GET'])
+def cadastrar():
     if request.method == 'POST':
         new = Animal(
             name= request.form.get('name'),
@@ -18,14 +22,23 @@ def add_animal():
             description=request.form.get('description'),
             image=request.form.get('image')
         )
-        
+    
         AnimalService.add_animal(new)
-        return redirect(url_for('animal_routes.add_animal'))
+        return redirect(url_for('animal_routes.listar_simples'))
+    
+    return render_template('animais/cadastrar.html')
 
+@animal_routes.route('/animais/listar_simples', methods=['GET'])
+def listar_simples():
     animals = AnimalService.list_animals()
-    return render_template('animals/add_animal.html', animals=animals)
+    return render_template('animais/listar_simples.html', animals=animals)
 
-@animal_routes.route('/animals/list_animals', methods=['GET'])
-def list_animals():
+@animal_routes.route('/animais/listar_em_grid', methods=['GET'])
+def list_animals_grid():
     animals = AnimalService.list_animals()
-    return render_template('animals/list_animals.html', animals=animals)
+    return render_template('animais/listar_em_grid.html', animals=animals)
+
+@animal_routes.route('/animais/remover_registro/<int:id>', methods=['POST'])
+def remover_registro(id):
+    AnimalService.remove_registry(id)
+    return redirect(url_for('animal_routes.listar_simples'))
