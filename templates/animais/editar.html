@@ -84,10 +84,13 @@
             <textarea id="description" name="description" placeholder="Digite uma descrição para o animal..." rows="4" cols="50">{{ animal.description }}</textarea><br><br>
 
             <label for="image">URL da Imagem:</label><br>
-            <input type="text" id="image" name="image" value="{{ animal.image }}" placeholder="Digite o caminho da imagem. Ex: /static/img/fotos/imagem.jpg"><br><br>
-            
-            <input type="hidden" name="id" value="{{ animal.id }}">
-            <input type="submit" class="btn_enviar" value="Salvar Alterações">
+            <input type="text" id="image" name="image" value="{{ animal.image }}" placeholder="Digite o caminho da imagem. Ex: /static/img/fotos/imagem.jpg"><br><br>            
+                
+            <div class="btn-opcoes">
+                <input type="hidden" name="id" value="{{ animal.id }}">
+                <input type="submit" class="btn-enviar" value="Salvar Alterações">
+                <button onclick="history.go(-1)" class="btn-cancelar">Cancelar</button>                
+            </div>
         
         </form>
     </div>

@@ -111,19 +111,50 @@ textarea{
     max-width: 100%;
 }
 
-input[type="submit"]{
-    background-color: #489FB5;
-    color: #EDE7E3;
+.btn-opcoes{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.btn-cancelar{
+    background-color: #FFA62B;
+    border-color: #FFA62B;
+    color: black;
     font-family: "Abel", sans-serif;
     font-size: 1.5rem;
     width: 10rem;
     height: 3rem;
     border-radius: 1rem;
-    border-color: #489FB5;
     margin-top: 2rem;
+    margin-bottom: 2rem;
     margin-left: auto;
+    box-shadow: 0 3px 0px #34586E;
+    cursor: pointer;
+}
+
+.btn-cancelar:hover{
+    background-color: red;
+    color: black;
+}
+
+input[type="submit"]{
+    background-color: #489FB5;
+    color: #EDE7E3;
+    font-family: "Abel", sans-serif;
+    font-size: 1.5rem;
+    width: 11rem;
+    height: 3rem;
+    border-radius: 1rem;
+    border-color: #489FB5;
+    box-shadow: 0 3px 0px #34586E;
+    margin-top: 2rem;
     margin-bottom: 2rem;
     cursor: pointer;
+}
+
+.btn_opcoes input[type="hidden"] {
+    display: none !important;
 }
 
 input[type="submit"]:hover{
