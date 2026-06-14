@@ -3,33 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="listar_simples_style.css">
+    <link rel="stylesheet" href="/static/css/listar_simples_style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    </style>
     <title>Projeto Patinhas | Listagem</title>
 </head>
 <body>
-    <h1>Animais Cadastrados</h1>
-    <ul>
-        {% for animal in animals %}
-            <li>
-                <strong>
-                    {{ animal.name }}
-                </strong>
-                - {{ animal.species }}
-                - {{ animal.breed }}
-                - {{ animal.age }} anos
-                - {{ animal.sex }}
-                - {{ animal.size }}
-                - {{ animal.status }}
-                - {{ animal.description }}
-                - {{ animal.image }} 
-                <a href=""><button>Editar</button></a>
-                <form action="/animais/remover_registro/{{animal.id}}" method="POST" style="display: inline;">
-                <button type="submit" onclick="return confirm('Tem certeza que deseja deletar o animal {{ animal.name }}?')">Deletar</button>
-            </form>
-            </li>
-        {% else %}
-            <li>Nenhum animal cadastrado.</li>
-        {% endfor %}
-    </ul>
+    
+    <div class="menu-lateral">
+        <h1>Patinhas do Brasil</h1>
+        
+        <a href="/animais/cadastrar">
+        <button>Cadastrar Animal</button>
+        </a>
+
+        <a href="/animais/animais_page">
+            <button>Visualizar Animais</button>
+        </a>
+
+        <a href="/animais/listar_simples">
+            <button>Lista Simples</button>
+        </a>
+
+        <a href="/">
+            <button>Voltar</button>
+        </a>
+    </div>
+
+    <div class="conteudo">
+        <h1>Animais Cadastrados</h1>
+        <ol>
+            {% for animal in animals %}
+                <li>
+                    <strong>
+                        {{ animal.name }}
+                    </strong>
+                    - {{ animal.species }}
+                    - {{ animal.breed }}
+                    - {{ animal.age }} {{ animal.age_compl }}
+                    - {{ animal.sex }}
+                    - {{ animal.size }}
+                    - {{ animal.status }}
+                    <div class="btn-opcoes-cadastro">
+                        <a href="">
+                            <button class="btn-editar">Editar</button>
+                        </a>
+                        <form action="/animais/remover_registro/{{animal.id}}" method="POST">
+                            <button type="submit" class="btn-deletar" onclick="return confirm('Tem certeza que deseja deletar o animal {{ animal.name }}?')">Deletar</button>
+                        </form>
+                    </div>
+                </li>
+            {% else %}
+                <li>Nenhum animal cadastrado.</li>
+            {% endfor %}
+        </ol>
+    </div>
 </body>
 </html>
