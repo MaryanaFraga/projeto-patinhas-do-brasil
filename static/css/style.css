@@ -41,6 +41,7 @@ button{
     height: 4rem;
     border-radius: 1rem;
     border-color: #489FB5;
+    cursor: pointer;
 }
 
 button:hover{
