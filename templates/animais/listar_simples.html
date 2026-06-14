@@ -34,10 +34,11 @@
 
     <div class="conteudo">
         <h1>Animais Cadastrados</h1>
-        <ol>
+        <ul>
             {% for animal in animals %}
                 <li>
-                    <strong>
+                    <span>{{ loop.index }}</span>
+                    <strong class="name">
                         {{ animal.name }}
                     </strong>
                     - {{ animal.species }}
@@ -45,20 +46,20 @@
                     - {{ animal.age }} {{ animal.age_compl }}
                     - {{ animal.sex }}
                     - {{ animal.size }}
-                    - {{ animal.status }}
+                    - <strong>{{ animal.status }}</strong>
                     <div class="btn-opcoes-cadastro">
                         <a href="/animais/editar/{{ animal.id }}">
                             <button class="btn-editar">Editar</button>
                         </a>
                         <form action="/animais/remover_registro/{{animal.id}}" method="POST">
-                            <button type="submit" class="btn-deletar" onclick="return confirm('Tem certeza que deseja deletar o animal {{ animal.name }}?')">Deletar</button>
+                            <button type="submit" class="btn-deletar" onclick="return confirm('Tem certeza que deseja deletar o registro de  {{ animal.name }}?')">Deletar</button>
                         </form>
                     </div>
                 </li>
             {% else %}
                 <li>Nenhum animal cadastrado.</li>
             {% endfor %}
-        </ol>
+        </ul>
     </div>
 </body>
 </html>
