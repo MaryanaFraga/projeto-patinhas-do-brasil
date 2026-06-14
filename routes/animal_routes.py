@@ -11,25 +11,12 @@ def show_menu():
 @animal_routes.route('/animais/cadastrar', methods=['POST', 'GET'])
 def cadastrar():
     if request.method == 'POST':
-
-        aux_age = float(request.form.get('age'))
-        aux_age_compl = "anos"
-        if aux_age < 1:
-            num = request.form.get('age')
-            num_str = str(num)
-            clean_str = num_str.replace("0.", "")
-            aux_age = float(clean_str)
-            aux_age_compl = "meses"
-        
-        elif aux_age == 1:
-            aux_age_compl = "ano"
-
         new = Animal(
             name= request.form.get('name'),
             species=request.form.get('species'),
             breed=request.form.get('breed'),
-            age=aux_age,
-            age_compl=aux_age_compl,
+            age=request.form.get('age'),
+            age_compl=request.form.get('age_compl'),
             sex=request.form.get('sex'),
             size=request.form.get('size'),
             status=request.form.get('status'),
@@ -67,25 +54,12 @@ def editar(id):
         return render_template('animais/editar.html', animal=animal)
     
     if request.method == 'POST':
-
-        aux_age = float(request.form.get('age'))
-        aux_age_compl = "anos"
-        if aux_age < 1:
-            num = request.form.get('age')
-            num_str = str(num)
-            clean_str = num_str.replace("0.", "")
-            aux_age = float(clean_str)
-            aux_age_compl = "meses"
-        
-        elif aux_age == 1:
-            aux_age_compl = "ano"
-
         updated_animal = Animal(
             name= request.form.get('name'),
             species=request.form.get('species'),
             breed=request.form.get('breed'),
-            age=aux_age,
-            age_compl=aux_age_compl,
+            age=request.form.get('age'),
+            age_compl=request.form.get('age_compl'),
             sex=request.form.get('sex'),
             size=request.form.get('size'),
             status=request.form.get('status'),
@@ -94,5 +68,5 @@ def editar(id):
         )
     
         AnimalService.edit_animal(id, updated_animal)
-        return redirect(request.referrer or url_for('index'))
+        return render_template('animais/animais_page.html', animal=updated_animal)
     
