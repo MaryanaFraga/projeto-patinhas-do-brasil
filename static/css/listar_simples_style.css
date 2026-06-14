@@ -123,13 +123,21 @@ h1{
     outline: none;
 }
 
-.ol{
+.ul{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     list-style-type: none;
-    counter-reset: contador;
     padding-left: 0;
+}
+
+span{
+    padding-right: 1rem;
+}
+
+strong{
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
 }
 
 li{
@@ -144,13 +152,6 @@ li{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-}
-
-li::before{
-    counter-increment: contador;
-    content: counter(contador) ". ";
-    font-weight: bold;
-    margin-right: 8px;
 }
 
 .no-data{

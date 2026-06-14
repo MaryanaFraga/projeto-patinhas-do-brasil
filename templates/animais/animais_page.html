@@ -45,11 +45,6 @@
                 <option value="Gato">Gato</option>
                 </select>
                 <select class="seleciona-filtro">
-                    <option value="">Raça</option>
-                    <option value="Vira-lata">Vira-lata</option>
-                    <option value="Shiba-inu">Shiba-inu</option>
-                </select>
-                <select class="seleciona-filtro">
                     <option value="">Porte</option>
                     <option value="Pequeno">Pequeno</option>
                     <option value="Médio">Médio</option>
@@ -83,7 +78,7 @@
                 </div>
                 <p class="animal-info">{{ animal.name }} - {{ animal.age }} {{ animal.age_compl }}</p>
                 <div class="card-actions">
-                    <button class="btn-visualizar" onclick="openModal('{{ animal.name }} - {{ animal.age }} {{ animal.age_compl }}', '{{ animal.image }}', '{{ animal.species }}', '{{ animal.breed }}', '{{ animal.size }}', '{{ animal.status }}', '{{ animal.description }}')">
+                    <button class="btn-visualizar" onclick="openModal('{{ animal.name }} - {{ animal.age }} {{ animal.age_compl }}', '{{ animal.image }}', '{{ animal.species }}', '{{ animal.breed }}', '{{ animal.size }}', 'Status: {{ animal.status }}', '{{ animal.description }}')">
                         Visualizar
                     </button>
                     <a href="/animais/editar/{{ animal.id }}" class="btn-editar">Editar</a>
