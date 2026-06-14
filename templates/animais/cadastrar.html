@@ -19,7 +19,7 @@
         <button>Cadastrar Animal</button>
         </a>
 
-        <a href="/animais/listar_em_grid">
+        <a href="/animais/animais_page">
             <button>Visualizar Animais</button>
         </a>
 
@@ -50,22 +50,22 @@
             <input type="text" id="breed" name="breed"><br><br>
 
             <label for="age">Idade:</label><br>
-            <input type="number" id="age" name="age" min="0"><br><br>
+            <input type="decimal" id="age" name="age" min="0" max="30" step="0.1"><br><br>
 
             <label for="sex">Sexo:</label><br>
             <select id="sex" name="sex" required>
                 <option value=></option>
                 <option value="M">Masculino</option>
                 <option value="F">Feminino</option>
-                <option value="I">Indefinido</option>
+                <option value="?">Indefinido</option>
             </select><br><br>
 
             <label for="size">Tamanho:</label><br>
             <select id="size" name="size" required>
                 <option value=></option>
-                <option value="P">Pequeno</option>
-                <option value="M">Médio</option>
-                <option value="G">Grande</option>
+                <option value="Pequeno">Pequeno</option>
+                <option value="Médio">Médio</option>
+                <option value="Grande">Grande</option>
             </select><br><br>
 
             <label for="status">Status:</label><br>
@@ -82,7 +82,7 @@
             <textarea id="description" name="description" placeholder="Digite uma descrição para o animal..." rows="4" cols="50"></textarea><br><br>
 
             <label for="image">URL da Imagem:</label><br>
-            <input type="text" id="image" name="image" placeholder="Digite o nome da imagem com o formato: ex: imagem.jpg"><br><br>
+            <input type="text" id="image" name="image" placeholder="Digite o nome da imagem com o formato. Ex: imagem.jpg"><br><br>
             
             <input type="submit" class="btn_enviar" value="Cadastrar">
         
