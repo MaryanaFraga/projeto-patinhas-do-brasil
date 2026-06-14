@@ -4,12 +4,13 @@ class Animal:
     STATUS_ADOPTED = 'adotado'
     STATUS_PROCESSING = 'em processo'
     
-    def __init__(self, name, species, breed, age, sex, size, status, image, description='', id=None):
+    def __init__(self, name, species, breed, age, age_compl, sex, size, status, image, description='', id=None):
         self.id = id
         self.name = name
         self.species = species
         self.breed = breed
         self.age = age
+        self.age_compl = age_compl
         self.sex = sex
         self.size = size
         self.status = status
