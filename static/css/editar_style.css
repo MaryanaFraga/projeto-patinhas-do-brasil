@@ -1,0 +1,132 @@
+ * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+body{
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    min-height: 100vh;
+}
+
+.menu-lateral{
+    background-color: #16697A;
+    color: #ffffff;
+    padding: 1.25rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;    
+}
+
+h1{
+    color: #EDE7E3;
+    font-family: "Abel", sans-serif;
+    font-size: 3rem;
+    font-weight: 400;
+    font-style: normal;
+}
+
+button{
+    background-color: #489FB5;
+    color: #EDE7E3;
+    font-family: "Abel", sans-serif;
+    font-size: 2.5rem;
+    width: 20rem;
+    height: 4rem;
+    border-radius: 1rem;
+    border-color: #489FB5;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #82C0CC;
+    color: black;
+}
+
+img{
+    width: 100%;
+    object-fit: cover;
+    position: fixed;
+    -webkit-mask-image: linear-gradient(to bottom, black 10%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 10%, transparent 100%);
+}
+
+.conteudo{
+    background-color: #EDE7E3;
+}
+
+h2{
+    font-family: "Abel", sans-serif;
+    font-size: 3rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
+    text-align: center;
+    color: #FFA62B;
+    padding-top: 100px;
+    margin: 0;
+
+}
+
+form{
+    font-family: "Abel", sans-serif;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-top: 2rem;
+    border-radius: 0.75rem;
+}
+
+label{
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+input[type="text"], select{
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+input[type="decimal"], select{
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+textarea{
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    max-width: 100%;
+}
+
+input[type="submit"]{
+    background-color: #489FB5;
+    color: #EDE7E3;
+    font-family: "Abel", sans-serif;
+    font-size: 1.5rem;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 1rem;
+    border-color: #489FB5;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover{
+    background-color: #82C0CC;
+    color: black;
+}

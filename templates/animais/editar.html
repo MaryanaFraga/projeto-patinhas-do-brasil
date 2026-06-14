@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/editar_style.css">
+    <title>Projeto Patinhas | Edição</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    </style>
+</head>
+<body>
+
+    <div class="menu-lateral">
+        <h1>Patinhas do Brasil</h1>
+        
+        <a href="/animais/cadastrar">
+        <button>Cadastrar Animal</button>
+        </a>
+
+        <a href="/animais/animais_page">
+            <button>Visualizar Animais</button>
+        </a>
+
+        <a href="/animais/listar_simples">
+            <button>Lista Simples</button>
+        </a>
+
+        <a href="/">
+            <button>Voltar</button>
+        </a>
+    </div>
+
+    <div class="conteudo">
+        <img src="/static/img/animals_walking3.png" alt="animais-andando">
+        
+        <h2>Editar Registro de {{ animal.name }}</h2>
+        
+        <form action="/animais/editar/{{ animal.id }}" method="POST">
+            <label for="name">Nome:</label><br>
+            <input type="text" id="name" name="name" value="{{ animal.name }}" required><br><br>
+
+            <label for="species">Espécie:</label><br>
+            <select id="species" name="species" required>
+                <option value=></option>
+                <option value="Cachorro" {% if animal.species == "Cachorro" %}selected{% endif %}>Cachorro</option>
+                <option value="Gato" {% if animal.species == "Gato" %}selected{% endif %}>Gato</option>
+            </select><br><br>
+
+            <label for="breed">Raça:</label><br>
+            <input type="text" id="breed" name="breed" value="{{ animal.breed }}" required><br><br>
+
+            <label for="age">Idade:</label><br>
+            <input type="decimal" id="age" name="age" min="0" max="30" step="0.1" value="{{ animal.age }}" required><br><br>
+
+            <label for="sex">Sexo:</label><br>
+            <select id="sex" name="sex" required>
+                <option value=></option>
+                <option value="M" {% if animal.sex == "M" %}selected{% endif %}>Masculino</option>
+                <option value="F" {% if animal.sex == "F" %}selected{% endif %}>Feminino</option>
+                <option value="?" {% if animal.sex == "?" %}selected{% endif %}>Indefinido</option>
+            </select><br><br>
+
+            <label for="size">Tamanho:</label><br>
+            <select id="size" name="size" required>
+                <option value=></option>
+                <option value="Pequeno" {% if animal.size == "Pequeno" %}selected{% endif %}>Pequeno</option>
+                <option value="Médio" {% if animal.size == "Médio" %}selected{% endif %}>Médio</option>
+                <option value="Grande" {% if animal.size == "Grande" %}selected{% endif %}>Grande</option>
+            </select><br><br>
+
+            <label for="status">Status:</label><br>
+            <select id="status" name="status" required>
+                <option value=></option>
+                <option value="Disponivel" {% if animal.status == "Disponivel" %}selected{% endif %}>Disponível</option>
+                <option value="Reservado" {% if animal.status == "Reservado" %}selected{% endif %}>Reservado</option>
+                <option value="Adotado" {% if animal.status == "Adotado" %}selected{% endif %}>Adotado</option>
+                <option value="Em tratamento" {% if animal.status == "Em tratamento" %}selected{% endif %}>Em tratamento</option>
+                <option value="Lar temporário" {% if animal.status == "Lar temporário" %}selected{% endif %}>Lar temporário</option>
+            </select><br><br>
+
+            <label for="description">Descrição:</label><br>
+            <textarea id="description" name="description" placeholder="Digite uma descrição para o animal..." rows="4" cols="50">{{ animal.description }}</textarea><br><br>
+
+            <label for="image">URL da Imagem:</label><br>
+            <input type="text" id="image" name="image" value="{{ animal.image }}" placeholder="Digite o caminho da imagem. Ex: /static/img/fotos/imagem.jpg"><br><br>
+            
+            <input type="hidden" name="id" value="{{ animal.id }}">
+            <input type="submit" class="btn_enviar" value="Salvar Alterações">
+        
+        </form>
+    </div>
+
+</body>
+</html>
