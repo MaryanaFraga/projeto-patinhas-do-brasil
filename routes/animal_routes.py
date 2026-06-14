@@ -11,11 +11,25 @@ def show_menu():
 @animal_routes.route('/animais/cadastrar', methods=['POST', 'GET'])
 def cadastrar():
     if request.method == 'POST':
+
+        aux_age = float(request.form.get('age'))
+        aux_age_compl = "anos"
+        if aux_age < 1:
+            num = request.form.get('age')
+            num_str = str(num)
+            clean_str = num_str.replace("0.", "")
+            aux_age = float(clean_str)
+            aux_age_compl = "meses"
+        
+        elif aux_age == 1:
+            aux_age_compl = "ano"
+
         new = Animal(
             name= request.form.get('name'),
             species=request.form.get('species'),
             breed=request.form.get('breed'),
-            age=request.form.get('age'),
+            age=aux_age,
+            age_compl=aux_age_compl,
             sex=request.form.get('sex'),
             size=request.form.get('size'),
             status=request.form.get('status'),
@@ -33,12 +47,52 @@ def listar_simples():
     animals = AnimalService.list_animals()
     return render_template('animais/listar_simples.html', animals=animals)
 
-@animal_routes.route('/animais/listar_em_grid', methods=['GET'])
-def list_animals_grid():
+@animal_routes.route('/animais/animais_page', methods=['GET'])
+def list_animals_view():
     animals = AnimalService.list_animals()
-    return render_template('animais/listar_em_grid.html', animals=animals)
+    return render_template('animais/animais_page.html', animals=animals)
 
 @animal_routes.route('/animais/remover_registro/<int:id>', methods=['POST'])
 def remover_registro(id):
     AnimalService.remove_registry(id)
-    return redirect(url_for('animal_routes.listar_simples'))
+    return redirect(request.referrer or url_for('index'))
+
+@animal_routes.route('/animais/editar/<int:id>', methods=['POST', 'GET'])
+def editar(id):
+    if request.method == 'GET':
+        conn = AnimalService.list_animals()
+        animal = next((a for a in conn if a['id'] == id), None)
+        if animal is None:
+            return "Animal não encontrado", 404
+        return render_template('animais/editar.html', animal=animal)
+    
+    if request.method == 'POST':
+
+        aux_age = float(request.form.get('age'))
+        aux_age_compl = "anos"
+        if aux_age < 1:
+            num = request.form.get('age')
+            num_str = str(num)
+            clean_str = num_str.replace("0.", "")
+            aux_age = float(clean_str)
+            aux_age_compl = "meses"
+        
+        elif aux_age == 1:
+            aux_age_compl = "ano"
+
+        updated_animal = Animal(
+            name= request.form.get('name'),
+            species=request.form.get('species'),
+            breed=request.form.get('breed'),
+            age=aux_age,
+            age_compl=aux_age_compl,
+            sex=request.form.get('sex'),
+            size=request.form.get('size'),
+            status=request.form.get('status'),
+            description=request.form.get('description'),
+            image=request.form.get('image')
+        )
+    
+        AnimalService.edit_animal(id, updated_animal)
+        return redirect(request.referrer or url_for('index'))
+    
