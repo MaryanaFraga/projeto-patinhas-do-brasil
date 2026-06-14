@@ -1,4 +1,4 @@
-* {
+ * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -41,6 +41,7 @@ button{
     height: 4rem;
     border-radius: 1rem;
     border-color: #489FB5;
+    cursor: pointer;
 }
 
 button:hover{
@@ -95,7 +96,7 @@ input[type="text"], select{
     border: 1px solid #ccc;
 }
 
-input[type="number"], select{
+input[type="decimal"], select{
     font-size: 1.25rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
@@ -121,6 +122,8 @@ input[type="submit"]{
     border-color: #489FB5;
     margin-top: 2rem;
     margin-left: auto;
+    margin-bottom: 2rem;
+    cursor: pointer;
 }
 
 input[type="submit"]:hover{
