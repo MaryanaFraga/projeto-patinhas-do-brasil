@@ -1,0 +1,302 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+body{
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    min-height: 100vh;
+    font-family: 'Abel', sans-serif;
+}
+
+.menu-lateral{
+    background-color: #16697A;
+    color: #ffffff;
+    padding: 1.25rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;    
+}
+
+h1{
+    color: #EDE7E3;
+    font-family: "Abel", sans-serif;
+    font-size: 3rem;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.menu-lateral button{
+    background-color: #489FB5;
+    color: #EDE7E3;
+    font-family: "Abel", sans-serif;
+    font-size: 2.5rem;
+    width: 20rem;
+    height: 4rem;
+    border-radius: 1rem;
+    border-color: #489FB5;
+    cursor: pointer;
+}
+
+.menu-lateral button:hover{
+    background-color: #82C0CC;
+    color: black;
+}
+
+.conteudo{
+    background-color: #82C0CC;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.buscador{
+    margin-bottom: 30px;
+}
+
+.barra-de-busca{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.busca{
+    flex: 1;
+    background-color: #EFE6E2;
+    border: none;
+    height: 45px;
+    border-radius: 4px;
+    padding: 0 15px;
+    font-size: 16px;
+    outline: none;
+}
+
+.btn-buscar{
+    background-color: #FFA62B;
+    color: Black;
+    font-family: "Abel", sans-serif;
+    font-size: 0.8rem;
+    width: 6rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    border-color: #FFA62B;
+    cursor: pointer;
+    font-size: 28px;
+    color: black;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 3px 0px #34586E;
+}
+
+.btn-buscar:hover{
+    background-color: #ffbd61;
+    color: black;
+}
+
+.filtros{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.seleciona-filtro{
+    background-color: #EFE6E2;
+    border: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #333;
+    border-radius: 4px;
+    min-width: 110px;
+    cursor: pointer;
+    outline: none;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    margin-right: 3rem;
+}
+
+.animal-card{
+    background-color: #EDE7E3;
+    aspect-ratio: 4 / 5;
+    border-radius: 4px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-width: 260px; 
+    width: 100%;
+    justify-content: center;
+}
+
+.card-image-container{
+    background-color: white;
+    width: 100%;
+    aspect-ratio: 5 / 6;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.animal-info{
+    font-size: 25px;
+    color: #222;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.card-actions{
+    display: flex;
+    gap: 10px;
+}
+
+.no-data{
+    grid-column: 1 / -1;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    padding: 40px 0;
+}
+
+.btn-visualizar, .btn-editar{
+    flex: 1;
+    background-color: #489FB5;
+    border-color: #489FB5;
+    color: #EDE7E3;
+    font-family: "Abel", sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 5.2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 3px 0px #34586E;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-visualizar:hover{
+    background-color: #385D73;
+    color: white;
+}
+
+a.btn-editar:hover{
+    background-color: #385D73;
+    color: white;
+}
+
+button:hover{
+    background-color: #FFA62B;
+    color: black;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: white;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 8px;
+    padding: 25px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    animation: scaleUp 0.3s ease;
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.8); }
+    to { transform: scale(1); }
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-close:hover {
+    color: #000;
+}
+
+.modal-body {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+#modal-img {
+    width: 280px;
+    aspect-ratio: 5 / 6;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.modal-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.8rem;
+}
+
+#modal-title {
+    color: #222;
+    font-size: 2rem;
+}
+
+#modal-desc {
+    color: #555;
+    font-size: 1.5rem;
+    line-height: 1.5;
+}

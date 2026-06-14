@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/animais_page_style.css">
+    <title>Projeto Patinhas | Grid</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    </style>
+</head>
+<body>
+    <div class="menu-lateral">
+        <h1>Patinhas do Brasil</h1>
+        
+        <a href="/animais/cadastrar">
+        <button>Cadastrar Animal</button>
+        </a>
+
+        <a href="/animais/animais_page">
+            <button>Visualizar Animais</button>
+        </a>
+
+        <a href="/animais/listar_simples">
+            <button>Lista Simples</button>
+        </a>
+
+        <a href="/">
+            <button>Voltar</button>
+        </a>
+    </div>
+
+    <div class="conteudo">
+
+        <div class="buscador">
+            <div class="barra-de-busca">
+                <input type="text" class="busca" placeholder="Buscar pet...">
+                <button type="submit" class="btn-buscar">Buscar</button>
+            </div>
+            <div class="filtros">
+                <select class="seleciona-filtro">
+                <option value="">Espécie</option>
+                <option value="Cachorro">Cachorro</option>
+                <option value="Gato">Gato</option>
+                </select>
+                <select class="seleciona-filtro">
+                    <option value="">Raça</option>
+                    <option value="Vira-lata">Vira-lata</option>
+                    <option value="Shiba-inu">Shiba-inu</option>
+                </select>
+                <select class="seleciona-filtro">
+                    <option value="">Porte</option>
+                    <option value="Pequeno">Pequeno</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Grande">Grande</option>
+                </select>
+                <select class="seleciona-filtro">
+                    <option value="">Sexo</option>
+                    <option value="Macho">Macho</option>
+                    <option value="Fêmea">Fêmea</option>
+                </select>
+                <select class="seleciona-filtro">
+                    <option value="">Status</option>
+                    <option value="Disponivel">Disponível</option>
+                    <option value="Reservado">Reservado</option>
+                    <option value="Adotado">Adotado</option>
+                    <option value="Em tratamento">Em tratamento</option>
+                    <option value="Lar temporário">Lar temporário</option>
+                </select>
+            </div>
+
+        </div>
+        
+        {% if animals %}
+        <div class="grid-container">
+
+            {% for animal in animals %}
+            <div class="animal-card">
+
+                <div class="card-image-container">
+                    <img src="{{animal.image}}" alt="{{animal.name}}">
+                </div>
+                <p class="animal-info">{{ animal.name }} - {{ animal.age }} {{ animal.age_compl }}</p>
+                <div class="card-actions">
+                    <button class="btn-visualizar" onclick="openModal('{{ animal.name }} - {{ animal.age }} {{ animal.age_compl }}', '{{ animal.image }}', '{{ animal.species }}', '{{ animal.breed }}', '{{ animal.size }}', '{{ animal.status }}', '{{ animal.description }}')">
+                        Visualizar
+                    </button>
+                    <a href="/animais/editar/{{ animal.id }}" class="btn-editar">Editar</a>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+
+        {% else %}
+            <p class="no-data">Nenhum animal cadastrado.</p>
+        {% endif %}
+
+    </div>    
+    <div id="animalModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="Foto">
+                <div class="modal-text">
+                    <h2 id="modal-title"></h2>
+                    <p id="modal-species"></p>
+                    <p id="modal-breed"></p>
+                    <p id="modal-size"></p>
+                    <p id="modal-status"></p>
+                    <p id="modal-desc"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, imgSrc, species, breed, size, status, description) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-img').src = imgSrc;
+            document.getElementById('modal-species').innerText = species;
+            document.getElementById('modal-breed').innerText = breed;
+            document.getElementById('modal-size').innerText = size;
+            document.getElementById('modal-status').innerText = status;
+            document.getElementById('modal-desc').innerText = description;
+            document.getElementById('animalModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('animalModal').classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('animalModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
