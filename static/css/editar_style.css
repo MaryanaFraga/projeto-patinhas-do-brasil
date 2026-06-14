@@ -96,11 +96,25 @@ input[type="text"], select{
     border: 1px solid #ccc;
 }
 
-input[type="decimal"], select{
+input[type="number"], select{
     font-size: 1.25rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
     border: 1px solid #ccc;
+}
+
+.idade_container{
+    display: inline-flex;
+
+}
+
+.idade_container input[type="number"]{
+    width: 70%;
+    margin-right: 0.5rem;
+}
+
+.idade_container input[type="text"]{
+    width: 100%;
 }
 
 textarea{
