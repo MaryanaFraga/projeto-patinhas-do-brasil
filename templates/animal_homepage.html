@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/animal_homepage_style.css">
+    <title>Projeto Patinhas | Visualizar Animais</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+    </style>
+</head>
+<body>
+    <div class="menu-lateral">
+        <h1>Patinhas do Brasil</h1>
+        
+        <a href="{{ url_for('animal_routes.cadastrar') }}">
+            <button class="btn-menu">Cadastrar Animal</button>
+        </a>
+
+        <a href="{{ url_for('animal_routes.list_animals_view') }}">
+            <button class="btn-menu">Visualizar Animais</button>
+        </a>
+
+        <a href="/animal_lista">
+            <button class="btn-menu">Lista Simples</button>
+        </a>
+
+        <a href="/">
+            <button class="btn-menu">Inicio</button>
+        </a>
+    </div>
+
+    <div class="conteudo">
+        <form action="{{ url_for('animal_routes.list_animals_view') }}" method="GET" class="buscador">
+            <div class="barra-de-busca">
+                <input type="text" name="name" class="busca" placeholder="Buscar pet por nome..." value="{{ request.args.get('name', '') }}">
+                <button type="submit" class="btn-buscar">Buscar</button>
+            </div>
+            
+            <div class="filtros">
+                <select name="species" class="seleciona-filtro" onchange="this.form.submit()">
+                    <option value="">Espécie</option>
+                    <option value="Cachorro" {% if request.args.get('species') == 'Cachorro' %}selected{% endif %}>Cachorro</option>
+                    <option value="Gato" {% if request.args.get('species') == 'Gato' %}selected{% endif %}>Gato</option>
+                </select>
+
+                <select name="size" class="seleciona-filtro" onchange="this.form.submit()">
+                    <option value="">Porte</option>
+                    <option value="Pequeno" {% if request.args.get('size') == 'Pequeno' %}selected{% endif %}>Pequeno</option>
+                    <option value="Médio" {% if request.args.get('size') == 'Médio' %}selected{% endif %}>Médio</option>
+                    <option value="Grande" {% if request.args.get('size') == 'Grande' %}selected{% endif %}>Grande</option>
+                </select>
+
+                <select name="sex" class="seleciona-filtro" onchange="this.form.submit()">
+                    <option value="">Sexo</option>
+                    <option value="M" {% if request.args.get('sex') == 'M' %}selected{% endif %}>Masculino</option>
+                    <option value="F" {% if request.args.get('sex') == 'F' %}selected{% endif %}>Feminino</option>
+                </select>
+
+                <select name="status" class="seleciona-filtro" onchange="this.form.submit()">
+                    <option value="">Status</option>
+                    <option value="Disponivel" {% if request.args.get('status') == 'Disponivel' %}selected{% endif %}>Disponível</option>
+                    <option value="Reservado" {% if request.args.get('status') == 'Reservado' %}selected{% endif %}>Reservado</option>
+                    <option value="Adotado" {% if request.args.get('status') == 'Adotado' %}selected{% endif %}>Adotado</option>
+                    <option value="Em tratamento" {% if request.args.get('status') == 'Em tratamento' %}selected{% endif %}>Em tratamento</option>
+                    <option value="Lar temporário" {% if request.args.get('status') == 'Lar temporário' %}selected{% endif %}>Lar temporário</option>
+                </select>
+
+                <a href="{{ url_for('animal_routes.list_animals_view') }}" class="btn-limpar">Limpar Filtros</a>
+            </div>
+        </form>
+
+        {% if request.args.get('species') or request.args.get('size') or request.args.get('sex') or request.args.get('status') or request.args.get('name') or request.args.get('id_editado') %}
+        <div class="filtros-info">
+            <p>
+                <strong>Filtros ativos:</strong> 
+                {% if request.args.get('name') %} Nome: "<em>{{ request.args.get('name') }}</em>" | {% endif %}
+                {% if request.args.get('species') %} Espécie: <strong>{{ request.args.get('species') | capitalize }}</strong> | {% endif %}
+                {% if request.args.get('size') %} Porte: <strong>{{ request.args.get('size') | capitalize }}</strong> | {% endif %}
+                {% if request.args.get('sex') %} Sexo: <strong>{{ request.args.get('sex') == 'M' and 'Masculino' or 'Feminino' }}</strong> | {% endif %}
+                {% if request.args.get('status') %} Status: <strong>{{ request.args.get('status') }}</strong> | {% endif %}
+                {% if request.args.get('id_editado') %} Alterações concluídas! {% endif %} 
+            </p>
+        </div>
+        {% endif %}
+        
+        {% if animals %}
+        <div class="grid-container">
+            {% for animal in animals %}
+            <div class="animal-card">
+                <div class="card-image-container">
+                    <span class="status-badge status-{{ animal.status | lower | replace(' ', '-') }}">
+                        {{ animal.status }}
+                    </span>
+                    <img src="{{ animal.image }}" alt="{{ animal.name }}">
+                </div>
+                
+                <div class="card-detalhes">
+                    <h3 class="animal-nome">{{ animal.name }}</h3>
+                    <p class="animal-idade">{{ animal.age }} {{ animal.age_compl }}</p>
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn-visualizar" onclick="openModal('{{ animal.name }}', '{{ animal.image }}', '{{ animal.species }}', '{{ animal.breed }}', '{{ animal.size }}', '{{ animal.status }}', '{{ animal.description }}', '{{ animal.age }} {{ animal.age_compl }} - {{ animal.sex }}')">
+                        Visualizar
+                    </button>
+                    <a href="/animal_editar/{{ animal.id }}" class="btn-editar">Editar</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p class="no-data">Nenhum animal cadastrado correspondente aos filtros.</p>
+        {% endif %}
+    </div>    
+
+    <div id="animalModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-body">
+                <div class="modal-img-container">
+                    <img id="modal-img" src="" alt="Foto do Pet">
+                </div>
+                <div class="modal-text">
+                    <h2 id="modal-title"></h2>
+                    <p class="modal-meta" id="modal-subdados"></p>
+                    <hr class="modal-divider">
+                    <p><strong>Espécie:</strong> <span id="modal-species"></span></p>
+                    <p><strong>Raça:</strong> <span id="modal-breed"></span></p>
+                    <p><strong>Porte:</strong> <span id="modal-size"></span></p>
+                    <p><strong>Situação:</strong> <span id="modal-status" class="modal-status-text"></span></p>
+                    <div class="modal-desc-box">
+                        <strong>História / Observações:</strong>
+                        <p id="modal-desc"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, imgSrc, species, breed, size, status, description, subdados) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-subdados').innerText = subdados;
+            document.getElementById('modal-img').src = imgSrc;
+            document.getElementById('modal-species').innerText = species;
+            document.getElementById('modal-breed').innerText = breed;
+            document.getElementById('modal-size').innerText = size;
+            document.getElementById('modal-status').innerText = status;
+            document.getElementById('modal-desc').innerText = description || "Sem descrição disponível.";
+            document.getElementById('animalModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('animalModal').classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('animalModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

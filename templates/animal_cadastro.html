@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/animal_cadastro_style.css">
+    <title>Projeto Patinhas | Cadastro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    </style>
+</head>
+<body>
+
+    <div class="menu-lateral">
+        <h1>Patinhas do Brasil</h1>
+        
+        <a href="/animal_cadastro">
+        <button>Cadastrar Animal</button>
+        </a>
+
+        <a href="/animal_homepage">
+            <button>Visualizar Animais</button>
+        </a>
+
+        <a href="/animal_lista">
+            <button>Lista Simples</button>
+        </a>
+
+        <a href="/">
+            <button>Inicio</button>
+        </a>
+    </div>
+
+    <div class="conteudo">
+        <img src="/static/img/animals_walking3.png" alt="animais-andando">
+        <h2>Cadastrar Novo Animal</h2>
+        <form action="/animal_cadastro" method="POST">
+            <label for="name">Nome:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="species">Espécie:</label><br>
+            <select id="species" name="species" required>
+                <option value=></option>
+                <option value="Cachorro">Cachorro</option>
+                <option value="Gato">Gato</option>
+            </select><br><br>
+
+            <label for="breed">Raça:</label><br>
+            <input type="text" id="breed" name="breed"><br><br>
+
+            <label for="age">Idade:</label><br>
+            <div class="idade_container">
+                <input type="number" id="age" name="age" min="1" max="30" step="1" required><br><br>
+                <select id="age_compl" name="age_compl" required>
+                    <option value=></option>
+                    <option value="meses">meses</option>
+                    <option value="anos">anos</option>
+                </select><br><br>
+            </div>
+
+            <label for="sex">Sexo:</label><br>
+            <select id="sex" name="sex" required>
+                <option value=></option>
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+                <option value="?">Indefinido</option>
+            </select><br><br>
+
+            <label for="size">Tamanho:</label><br>
+            <select id="size" name="size" required>
+                <option value=></option>
+                <option value="Pequeno">Pequeno</option>
+                <option value="Médio">Médio</option>
+                <option value="Grande">Grande</option>
+            </select><br><br>
+
+            <label for="status">Status:</label><br>
+            <select id="status" name="status" required>
+                <option value=></option>
+                <option value="Disponivel">Disponível</option>
+                <option value="Reservado">Reservado</option>
+                <option value="Adotado">Adotado</option>
+                <option value="Em tratamento">Em tratamento</option>
+                <option value="Lar temporário">Lar temporário</option>
+            </select><br><br>
+
+            <label for="description">Descrição:</label><br>
+            <textarea id="description" name="description" placeholder="Digite uma descrição para o animal..." rows="4" cols="50"></textarea><br><br>
+
+            <label for="image">URL da Imagem:</label><br>
+            <input type="text" id="image" name="image" placeholder="Digite o nome da imagem com o formato. Ex: imagem.jpg"><br><br>
+            
+            <input type="submit" class="btn_enviar" value="Cadastrar">
+        
+        </form>
+    </div>
+
+</body>
+</html>

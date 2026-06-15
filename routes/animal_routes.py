@@ -1,15 +1,10 @@
 from flask import Blueprint, redirect, render_template, request, url_for
 from models.Animal import Animal
 from services.animal_service import AnimalService
-from database.db import get_db_connection
 
 animal_routes = Blueprint('animal_routes', __name__)
 
-@animal_routes.route('/animais/menu')
-def show_menu():
-    return render_template('animais/menu.html')
-
-@animal_routes.route('/animais/cadastrar', methods=['POST', 'GET'])
+@animal_routes.route('/animal_cadastro', methods=['POST', 'GET'])
 def cadastrar():
     if request.method == 'POST':
         new = Animal(
@@ -26,39 +21,33 @@ def cadastrar():
         )
     
         AnimalService.add_animal(new)
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        novo_animal_id = cursor.lastrowid
-        conn.commit()
-        conn.close()
-        
-        return redirect(url_for('animal_routes.list_animals_view', id_editado=novo_animal_id))
+        return redirect(url_for('animal_routes.list_animals_view'))
     
-    return render_template('animais/cadastrar.html')
+    return render_template('animal_cadastro.html')
 
-@animal_routes.route('/animais/listar_simples', methods=['GET'])
+@animal_routes.route('/animal_lista', methods=['GET'])
 def listar_simples():
     animals = AnimalService.list_animals()
-    return render_template('animais/listar_simples.html', animals=animals)
+    return render_template('animal_lista.html', animals=animals)
 
-@animal_routes.route('/animais/animais_page', methods=['GET'])
+@animal_routes.route('/animal_homepage', methods=['GET'])
 def list_animals_view():
     animals = AnimalService.list_animals()
-    return render_template('animais/animais_page.html', animals=animals)
+    return render_template('animal_homepage.html', animals=animals)
 
 @animal_routes.route('/animais/remover_registro/<int:id>', methods=['POST'])
 def remover_registro(id):
     AnimalService.remove_registry(id)
     return redirect(request.referrer or url_for('index'))
 
-@animal_routes.route('/animais/editar/<int:id>', methods=['POST', 'GET'])
+@animal_routes.route('/animal_editar/<int:id>', methods=['POST', 'GET'])
 def editar(id):
     if request.method == 'GET':
         conn = AnimalService.list_animals()
         animal = next((a for a in conn if a['id'] == id), None)
         if animal is None:
             return "Animal não encontrado", 404
-        return render_template('animais/editar.html', animal=animal)
+        return render_template('animal_editar.html', animal=animal)
     
     if request.method == 'POST':
         updated_animal = Animal(
