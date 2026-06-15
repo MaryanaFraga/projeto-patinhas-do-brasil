@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/adotante_lista_style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+    </style>
+    <title>Projeto Patinhas | Adotantes</title>
+</head>
+<body>
+    
+    <div class="menu-lateral">
+        <h1>Patinhas do Brasil</h1>
+        
+        <a href="{{ url_for('adotante_routes.cadastrar') }}">
+            <button class="btn-menu">Cadastrar adotante</button>
+        </a>
+
+        <a href="{{ url_for('adotante_routes.listar') }}">
+            <button class="btn-menu">Listar adotantes</button>
+        </a>
+
+        <a href="/">
+            <button class="btn-menu">Inicio</button>
+        </a>
+    </div>
+
+    <div class="conteudo">
+        <form action="{{ url_for('adotante_routes.listar') }}" method="GET" class="buscador">
+            <div class="barra-de-busca">
+                <input type="text" name="name" class="busca" placeholder="Buscar adotante por nome..." value="{{ request.args.get('name', '') }}">
+                <button type="submit" class="btn-buscar">Buscar</button>
+            </div>
+        </form>
+
+        <ul class="lista-cards">
+            {% for adotante in adotantes %}
+                <li class="card-adotante">
+                    <div class="card-dados">
+                        <div class="card-header">
+                            <span class="badge-index">#{{ loop.index }}</span>
+                            <h3 class="adotante-nome">{{ adotante.nome_completo }}</h3>
+                        </div>
+                        
+                        <div class="card-body">
+                            <p><strong>Telefone:</strong> {{ adotante.tel }}</p>
+                            <p><strong>Endereço:</strong> Rua {{ adotante.rua }}, nº {{ adotante.num }} — Bairro {{ adotante.bairro }}, {{ adotante.cidade }} / {{ adotante.estado_sigla }}</p>
+                            {% if adotante.obs %}
+                                <p class="adotante-obs"><strong>Observações:</strong> <span>{{ adotante.obs }}</span></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="btn-opcoes-cadastro">
+                        <a href="{{ url_for('adotante_routes.editar', id=adotante.id) }}">
+                            <button class="btn-action btn-editar">Editar</button>
+                        </a>
+                        
+                        <form action="{{ url_for('adotante_routes.remover', id=adotante.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn-action btn-deletar" onclick="return confirm('Tem certeza que deseja deletar o registro de {{ adotante.nome_completo }}?')">Deletar</button>
+                        </form>
+                    </div>
+                </li>
+            {% else %}
+                <li class="card-vazio">Nenhum adotante cadastrado encontrado.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

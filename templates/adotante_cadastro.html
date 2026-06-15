@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/adotante_cadastro_style.css">
+    <title>Projeto Patinhas | Cadastro de adotantes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+    </style>
+</head>
+<body>
+
+    <div class="menu-lateral">
+        <h1>Patinhas do Brasil</h1>
+        
+        <a href="{{ url_for('adotante_routes.cadastrar') }}">
+            <button>Cadastrar adotante</button>
+        </a>
+
+        <a href="{{ url_for('adotante_routes.listar') }}">
+            <button>Listar adotantes</button>
+        </a>
+
+        <a href="/">
+            <button>Inicio</button>
+        </a>
+    </div>
+
+    <div class="conteudo">
+        <img src="/static/img/animals_walking3.png" alt="animais-andando">
+        <h2>Cadastrar Novo Adotante</h2>
+        
+        <form action="{{ url_for('adotante_routes.cadastrar') }}" method="POST">
+            
+            <label for="nome_completo">Nome Completo:</label><br>
+            <input type="text" id="nome_completo" name="nome_completo" required><br><br>
+
+            <label for="tel">Telefone:</label><br>
+            <input type="text" id="tel" name="tel" required><br><br>
+
+            <label for="rua">Rua:</label><br>
+            <input type="text" id="rua" name="rua" required><br><br>
+
+            <label for="num">Número:</label><br>
+            <input type="text" id="num" name="num" required><br><br>
+
+            <label for="bairro">Bairro:</label><br>
+            <input type="text" id="bairro" name="bairro" required><br><br>
+
+            <label for="cidade">Cidade:</label><br>
+            <input type="text" id="cidade" name="cidade" required><br><br>
+
+            <label for="estado_sigla">Estado (Sigla):</label><br>
+            <input type="text" id="estado_sigla" name="estado_sigla" maxlength="2" placeholder="EX: SP" required><br><br>
+
+            <label for="obs">Observações / Preferências:</label><br>
+            <textarea id="obs" name="obs" placeholder="Digite observações sobre o adotante e suas preferências..." rows="4" cols="50"></textarea><br><br>
+            
+            <input type="submit" class="btn_enviar" value="Cadastrar">
+        
+        </form>
+    </div>
+
+</body>
+</html>

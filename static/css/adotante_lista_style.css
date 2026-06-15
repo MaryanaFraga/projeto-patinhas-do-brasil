@@ -1,0 +1,221 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+body{
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    min-height: 100vh;
+    font-family: 'Abel', sans-serif;
+}
+
+.menu-lateral{
+    background-color: #16697A;
+    color: #ffffff;
+    padding: 1.25rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;    
+}
+
+h1{
+    color: #EDE7E3;
+    font-family: "Abel", sans-serif;
+    font-size: 3rem;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.menu-lateral button{
+    background-color: #489FB5;
+    color: #EDE7E3;
+    font-family: "Abel", sans-serif;
+    font-size: 2.5rem;
+    width: 20rem;
+    height: 4rem;
+    border-radius: 1rem;
+    border-color: #489FB5;
+    cursor: pointer;
+}
+
+.menu-lateral button:hover{
+    background-color: #82C0CC;
+    color: black;
+}
+
+.conteudo {
+  background-color: #82C0CC;
+  padding: 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.buscador{
+    margin-bottom: 30px;
+}
+
+.barra-de-busca{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.busca{
+    flex: 1;
+    background-color: #EFE6E2;
+    border: none;
+    height: 45px;
+    border-radius: 4px;
+    padding: 0 15px;
+    font-size: 16px;
+    outline: none;
+}
+
+.btn-buscar{
+    background-color: #FFA62B;
+    color: Black;
+    font-family: "Abel", sans-serif;
+    font-size: 0.8rem;
+    width: 6rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    border-color: #FFA62B;
+    cursor: pointer;
+    font-size: 28px;
+    color: black;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 3px 0px #34586E;
+}
+
+.btn-buscar:hover{
+    background-color: #ffbd61;
+    color: black;
+}
+
+.lista-cards {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card-adotante {
+  background-color: #EFE6E2;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-left: 6px solid #FFA62B;
+}
+
+.card-dados {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.badge-index {
+  background-color: #16697A;
+  color: #EDE7E3;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.adotante-nome {
+  font-family: "Abel", sans-serif;
+  font-size: 2rem;
+  color: #16697A;
+  font-weight: 600;
+}
+
+.card-body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  line-height: 1.6;
+}
+
+.card-body strong {
+  color: #16697A;
+}
+
+.adotante-obs {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: #EFE6E2;
+  border-radius: 0.25rem;
+  border-left: 3px solid #ccc;
+  font-style: italic;
+}
+
+.btn-opcoes-cadastro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 8rem;
+}
+
+.btn-action {
+  font-family: "Abel", sans-serif;
+  font-size: 1.25rem;
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 3px 0px #34586E;
+}
+
+.btn-editar {
+  background-color: #489FB5;
+  color: white;
+}
+
+.btn-editar:hover {
+  background-color: #82C0CC;
+  color: black;
+}
+
+.btn-deletar {
+  background-color: #e63946;
+  color: white;
+}
+
+.btn-deletar:hover {
+  background-color: #ba181b;
+}
+
+.card-vazio {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  font-size: 1.25rem;
+  color: #777;
+  padding: 3rem;
+  background: white;
+  border-radius: 0.75rem;
+}
