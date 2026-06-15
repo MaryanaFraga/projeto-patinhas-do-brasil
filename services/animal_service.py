@@ -36,14 +36,24 @@ class AnimalService:
     
     @staticmethod
     def list_animals():
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        id_editado = request.args.get('id_editado')
+
+        if id_editado:
+            query = 'SELECT * FROM animais WHERE id = ?'
+            cursor.execute(query, [id_editado])
+            rows = cursor.fetchall()
+            
+            conn.close()
+            return rows
+
         filtro_species = request.args.get('species')
         filtro_status = request.args.get('status')
         filtro_size = request.args.get('size')
         filtro_sex = request.args.get('sex')
         filtro_name = request.args.get('name')
-
-        conn = get_db_connection()
-        cursor = conn.cursor()
 
         query = 'SELECT * FROM animais WHERE 1=1'
         params = []
