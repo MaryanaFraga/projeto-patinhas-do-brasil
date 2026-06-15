@@ -1,9 +1,8 @@
 import sqlite3
 
-# connect to database
 def get_db_connection():
     conn = sqlite3.connect('database.db')
-    conn.row_factory = sqlite3.Row # save as a dictionary
+    conn.row_factory = sqlite3.Row
     return conn
 
 def init_db():
@@ -29,11 +28,14 @@ def init_db():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS adotantes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            cellphone TEXT NOT NULL,
-            email TEXT NOT NULL,
-            address TEXT NOT NULL,
-            observations TEXT
+            nome_completo TEXT NOT NULL,
+            tel TEXT NOT NULL,
+            rua TEXT NOT NULL,
+            num NUMERIC,
+            bairro TEXT NOT NULL,
+            cidade TEXT NOT NULL,
+            estado_sigla TEXT NOT NULL,
+            obs TEXT
         )
     ''')
 
