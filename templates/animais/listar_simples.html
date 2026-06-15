@@ -33,7 +33,54 @@
     </div>
 
     <div class="conteudo">
-        <h1>Animais Cadastrados</h1>
+        <form action="{{ url_for('animal_routes.listar_simples') }}" method="GET" class="buscador">
+            <div class="barra-de-busca">
+                <input type="text" name="name" class="busca" placeholder="Buscar pet..." value="{{ request.args.get('name', '') }}">
+                <button type="submit" class="btn-buscar">Buscar</button>
+            </div>
+            <div class="filtros">
+                
+                <select name="species" class="seleciona-filtro" onsubmit="this.form.submit()">
+                <option value="">Espécie</option>
+                <option value="Cachorro">Cachorro</option>
+                <option value="Gato">Gato</option>
+                </select>
+                <select name="size" class="seleciona-filtro" onsubmit="this.form.submit()">
+                    <option value="">Porte</option>
+                    <option value="Pequeno">Pequeno</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Grande">Grande</option>
+                </select>
+                <select name="sex" class="seleciona-filtro" onsubmit="this.form.submit()">
+                    <option value="">Sexo</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                </select>
+                <select name="status" class="seleciona-filtro" onsubmit="this.form.submit()">
+                    <option value="">Status</option>
+                    <option value="Disponivel">Disponível</option>
+                    <option value="Reservado">Reservado</option>
+                    <option value="Adotado">Adotado</option>
+                    <option value="Em tratamento">Em tratamento</option>
+                    <option value="Lar temporário">Lar temporário</option>
+                </select>
+                <a href="/animais/listar_simples" class="btn-limpar">Limpar Filtros</a>
+            </div>
+        </form>
+
+        {% if request.args.get('species') or request.args.get('size') or request.args.get('sex') or request.args.get('status') or request.args.get('name') or request.args.get('id_editado') %}
+        <div class="filtros-info">
+            <p>
+                <strong>Filtros ativos:</strong> 
+                {% if request.args.get('search_name') %} Nome contendo "<em>{{ request.args.get('name') }}</em>" | {% endif %}
+                {% if request.args.get('species') %} Espécie: <strong>{{ request.args.get('species') | capitalize }}</strong> | {% endif %}
+                {% if request.args.get('size') %} Porte: <strong>{{ request.args.get('size') | capitalize }}</strong> | {% endif %}
+                {% if request.args.get('sex') %} Sexo: <strong>{{ request.args.get('sex') | capitalize }}</strong> | {% endif %}
+                {% if request.args.get('status') %} Status: <strong>{{ request.args.get('status') | capitalize }}</strong> | {% endif %}
+                {% if request.args.get('id_editado') %} Alterações concluidas, limpe os filtros. {% endif %} 
+            </p>
+        </div>
+        {% endif %}
         <ul>
             {% for animal in animals %}
                 <li>
