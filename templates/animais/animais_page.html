@@ -67,15 +67,16 @@
             </div>
         </form>
 
-        {% if request.args.get('species') or request.args.get('size') or request.args.get('sex') or request.args.get('status') or request.args.get('search_name') %}
+        {% if request.args.get('species') or request.args.get('size') or request.args.get('sex') or request.args.get('status') or request.args.get('name') or request.args.get('id_editado') %}
         <div class="filtros-info">
             <p>
                 <strong>Filtros ativos:</strong> 
-                {% if request.args.get('search_name') %} Nome contendo "<em>{{ request.args.get('search_name') }}</em>" | {% endif %}
+                {% if request.args.get('search_name') %} Nome contendo "<em>{{ request.args.get('name') }}</em>" | {% endif %}
                 {% if request.args.get('species') %} Espécie: <strong>{{ request.args.get('species') | capitalize }}</strong> | {% endif %}
                 {% if request.args.get('size') %} Porte: <strong>{{ request.args.get('size') | capitalize }}</strong> | {% endif %}
                 {% if request.args.get('sex') %} Sexo: <strong>{{ request.args.get('sex') | capitalize }}</strong> | {% endif %}
                 {% if request.args.get('status') %} Status: <strong>{{ request.args.get('status') | capitalize }}</strong> | {% endif %}
+                {% if request.args.get('id_editado') %} Alterações concluidas, limpe os filtros. {% endif %} 
             </p>
         </div>
         {% endif %}
