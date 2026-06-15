@@ -148,7 +148,7 @@ textarea{
 }
 
 .btn-cancelar:hover{
-    background-color: red;
+    background-color: #e08300;
     color: black;
 }
 
@@ -174,4 +174,25 @@ input[type="submit"]{
 input[type="submit"]:hover{
     background-color: #82C0CC;
     color: black;
+}
+
+.btn-deletar{
+    background-color: red;
+    border-color: red;
+    color: black;
+    font-family: "Abel", sans-serif;
+    font-size: 1.5rem;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    box-shadow: 0 3px 0px #34586E;
+    cursor: pointer;
+}
+
+.btn-deletar:hover{
+    background-color: rgb(151, 0, 0);
+    color: white;
 }
