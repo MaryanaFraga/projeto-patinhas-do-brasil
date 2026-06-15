@@ -1,4 +1,5 @@
 from database.db import get_db_connection
+from flask import request
 from models.Animal import Animal
 
 class AnimalService:
@@ -35,9 +36,39 @@ class AnimalService:
     
     @staticmethod
     def list_animals():
+        filtro_species = request.args.get('species')
+        filtro_status = request.args.get('status')
+        filtro_size = request.args.get('size')
+        filtro_sex = request.args.get('sex')
+        filtro_name = request.args.get('name')
+
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM animais')
+
+        query = 'SELECT * FROM animais WHERE 1=1'
+        params = []
+
+        if filtro_species:
+            query += ' AND species = ?'
+            params.append(filtro_species)
+
+        if filtro_status:
+            query += ' AND status = ?'
+            params.append(filtro_status)
+
+        if filtro_size:
+            query += ' AND size = ?'
+            params.append(filtro_size)
+
+        if filtro_sex:
+            query += ' AND sex = ?'
+            params.append(filtro_sex)
+
+        if filtro_name:
+            query += ' AND name LIKE ?'
+            params.append(f'%{filtro_name}%')
+
+        cursor.execute(query, params)
         rows = cursor.fetchall()
         
         conn.close()

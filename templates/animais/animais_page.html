@@ -27,35 +27,35 @@
         </a>
 
         <a href="/">
-            <button>Voltar</button>
+            <button>Inicio</button>
         </a>
     </div>
 
     <div class="conteudo">
-
-        <div class="buscador">
+        <form action="{{ url_for('animal_routes.list_animals_view') }}" method="GET" class="buscador">
             <div class="barra-de-busca">
-                <input type="text" class="busca" placeholder="Buscar pet...">
+                <input type="text" name="name" class="busca" placeholder="Buscar pet..." value="{{ request.args.get('name', '') }}">
                 <button type="submit" class="btn-buscar">Buscar</button>
             </div>
             <div class="filtros">
-                <select class="seleciona-filtro">
+                
+                <select name="species" class="seleciona-filtro" onsubmit="this.form.submit()">
                 <option value="">Espécie</option>
                 <option value="Cachorro">Cachorro</option>
                 <option value="Gato">Gato</option>
                 </select>
-                <select class="seleciona-filtro">
+                <select name="size" class="seleciona-filtro" onsubmit="this.form.submit()">
                     <option value="">Porte</option>
                     <option value="Pequeno">Pequeno</option>
                     <option value="Médio">Médio</option>
                     <option value="Grande">Grande</option>
                 </select>
-                <select class="seleciona-filtro">
+                <select name="sex" class="seleciona-filtro" onsubmit="this.form.submit()">
                     <option value="">Sexo</option>
-                    <option value="Macho">Macho</option>
-                    <option value="Fêmea">Fêmea</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
                 </select>
-                <select class="seleciona-filtro">
+                <select name="status" class="seleciona-filtro" onsubmit="this.form.submit()">
                     <option value="">Status</option>
                     <option value="Disponivel">Disponível</option>
                     <option value="Reservado">Reservado</option>
@@ -63,9 +63,22 @@
                     <option value="Em tratamento">Em tratamento</option>
                     <option value="Lar temporário">Lar temporário</option>
                 </select>
+                <a href="/animais/animais_page" class="btn-limpar">Limpar Filtros</a>
             </div>
+        </form>
 
+        {% if request.args.get('species') or request.args.get('size') or request.args.get('sex') or request.args.get('status') or request.args.get('search_name') %}
+        <div class="filtros-info">
+            <p>
+                <strong>Filtros ativos:</strong> 
+                {% if request.args.get('search_name') %} Nome contendo "<em>{{ request.args.get('search_name') }}</em>" | {% endif %}
+                {% if request.args.get('species') %} Espécie: <strong>{{ request.args.get('species') | capitalize }}</strong> | {% endif %}
+                {% if request.args.get('size') %} Porte: <strong>{{ request.args.get('size') | capitalize }}</strong> | {% endif %}
+                {% if request.args.get('sex') %} Sexo: <strong>{{ request.args.get('sex') | capitalize }}</strong> | {% endif %}
+                {% if request.args.get('status') %} Status: <strong>{{ request.args.get('status') | capitalize }}</strong> | {% endif %}
+            </p>
         </div>
+        {% endif %}
         
         {% if animals %}
         <div class="grid-container">
@@ -78,7 +91,7 @@
                 </div>
                 <p class="animal-info">{{ animal.name }} - {{ animal.age }} {{ animal.age_compl }}</p>
                 <div class="card-actions">
-                    <button class="btn-visualizar" onclick="openModal('{{ animal.name }} - {{ animal.age }} {{ animal.age_compl }}', '{{ animal.image }}', '{{ animal.species }}', '{{ animal.breed }}', '{{ animal.size }}', 'Status: {{ animal.status }}', '{{ animal.description }}')">
+                    <button class="btn-visualizar" onclick="openModal('{{ animal.name }} - {{ animal.age }} {{ animal.age_compl }} - {{ animal.sex }}', '{{ animal.image }}', '{{ animal.species }}', '{{ animal.breed }}', '{{ animal.size }}', 'Status: {{ animal.status }}', '{{ animal.description }}')">
                         Visualizar
                     </button>
                     <a href="/animais/editar/{{ animal.id }}" class="btn-editar">Editar</a>
