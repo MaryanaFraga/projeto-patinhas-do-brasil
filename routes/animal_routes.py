@@ -1,6 +1,7 @@
 from flask import Blueprint, redirect, render_template, request, url_for
 from models.Animal import Animal
 from services.animal_service import AnimalService
+from database.db import get_db_connection
 
 animal_routes = Blueprint('animal_routes', __name__)
 
@@ -25,7 +26,13 @@ def cadastrar():
         )
     
         AnimalService.add_animal(new)
-        return redirect(url_for('animal_routes.listar_simples'))
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        novo_animal_id = cursor.lastrowid
+        conn.commit()
+        conn.close()
+        
+        return redirect(url_for('animal_routes.list_animals_view', id_editado=novo_animal_id))
     
     return render_template('animais/cadastrar.html')
 
@@ -68,5 +75,5 @@ def editar(id):
         )
     
         AnimalService.edit_animal(id, updated_animal)
-        return render_template('animais/animais_page.html', animal=updated_animal)
+        return redirect(url_for('animal_routes.list_animals_view', id_editado=id))
     
