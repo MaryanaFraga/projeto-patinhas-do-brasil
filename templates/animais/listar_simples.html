@@ -28,7 +28,7 @@
         </a>
 
         <a href="/">
-            <button>Voltar</button>
+            <button>Inicio</button>
         </a>
     </div>
 
@@ -52,7 +52,7 @@
                             <button class="btn-editar">Editar</button>
                         </a>
                         <form action="/animais/remover_registro/{{animal.id}}" method="POST">
-                            <button type="submit" class="btn-deletar" onclick="return confirm('Tem certeza que deseja deletar o registro de  {{ animal.name }}?')">Deletar</button>
+                            <button type="submit" class="btn-deletar" onclick="return confirm('Tem certeza que deseja deletar o registro de {{ animal.name }}?')">Deletar</button>
                         </form>
                     </div>
                 </li>
